@@ -5,6 +5,7 @@ import { DOCUMENT } from '@angular/common';
 import { ZoomMtg } from '@zoomus/websdk';
 import { environment } from '../environments/environment';
 
+ZoomMtg.setZoomJSLib(environment.zoom.jsLib, '/av');
 ZoomMtg.preLoadWasm();
 ZoomMtg.prepareJssdk();
 
