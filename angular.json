@@ -48,6 +48,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "baseHref": "/zoom-websdk-sample-angular/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
