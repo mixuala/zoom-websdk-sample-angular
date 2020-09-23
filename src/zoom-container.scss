@@ -1,0 +1,169 @@
+
+
+/**
+ * Zoom CSS fixes
+ */
+ #zmmtg-root#zmmtg-root {
+  position: relative;
+  border-radius: 10px;
+  display: none;
+  &.hydrated {
+    display: block;
+  }
+  &.portrait {
+    margin: 0 auto;   // center
+    min-height: 211px;
+    height: 100%;
+    max-width: calc( 100% - 40px);
+  }
+  &.landscape {
+    margin: 20px auto 0;   // center
+    max-width: calc( 100% - 16px);
+    height: calc(100% - 40px);
+  }
+  @media (max-width: 767px) {
+    // portrait
+    & {
+      margin: 0 auto;   // center
+      min-height: 211px;
+      height: 100%;
+      max-width: calc( 100% - 40px);
+    }
+  }
+  @media (min-width: 768px) {
+    // landscape
+    & {
+      margin: 20px auto 0;   // center
+      max-width: calc( 100% - 16px);
+      height: calc(100% - 40px);
+    }
+  }
+
+  .meeting-app {
+    &, .active-main {
+      width: 100% !important;
+      height: 100% !important;  
+    }
+    .active-video-container__wrap {
+      width: 100% !important;
+      height: 80% !important;
+    } 
+    .join-dialog {
+      width: 100% !important;
+    }
+  }
+  
+  .meeting-client {
+    &, .meeting-client-inner {
+      position:unset;
+    }
+    #wc-content {
+      canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+      // contains meeting video stream
+      position: unset;
+      // #wc-container-left > div {
+      //   // vertical center video
+      //   position: absolute;
+      //   top: 50%;
+      //   transform: translateY(-50%);
+      // }
+      #wc-container-left {
+        .sharing-layout {
+          & .sharee-container__viewport {
+            width: 100% !important;
+            height: 100% !important;
+          }
+        }
+        .main-layout {
+          // vertical center video
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 100%;
+        }
+      }
+      #sv-active-speaker-view {
+        // sv=="speaker-view" or spotlight video?
+        .active-main {
+          // height: 100% !important;
+          .active-avatar {
+            height: 50%;
+          }
+          canvas#sv-active-video {
+          }
+          canvas#active-my-canvas {
+            position: absolute;
+            left:0;
+            z-index: 2;
+          }
+        }
+      }
+      #wc-footer.footer {
+        height: 32px;
+        border-radius: 0 0 10px 10px;
+        #wc-footer-left {
+          min-width: 116px;
+          .join-audio {
+            width: 48px;
+            min-width: 48px;
+          }
+        }
+        .footer-button__button {
+          width: 48px;
+        }
+        .footer__leave-btn {
+          line-height: 100%;
+        }
+      }
+    }
+    #dialog-join.diaout-layer {
+      // contains 'join audio by computer' button
+      width:unset !important;
+      bottom: unset !important;
+      position: relative;
+    }
+  } // end: .meeting-client-inner
+}
+
+// unset react/zoom CSS
+body.undo-zoom-react.undo-zoom-react {
+  min-height: unset;
+  min-width: unset;
+}
+
+// fit to container
+.ReactModalPortal.ReactModalPortal {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  .ReactModal__Overlay {
+    position: relative !important;
+    height: 100%;
+  }
+  .suspension-canvas-layer {
+    canvas#suspension-active-video {
+      // marked as [zoom username]
+
+    }
+    canvas#suspension-my-canvas {
+      // selfie video for [player.displayName]
+
+    }
+    video#suspension-my-video {
+
+    }
+  }
+}
+
+body > .ReactModalPortal.ReactModalPortal{
+  display:none;
+}
+
+/**
+ * END Zoom CSS fixes
+ */

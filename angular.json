@@ -36,7 +36,10 @@
             "styles": [
               "node_modules/@zoomus/websdk/dist/css/bootstrap.css",
               "node_modules/@zoomus/websdk/dist/css/react-select.css",
-              "src/styles.css"
+              "src/styles.css",
+              {
+                "input": "src/zoom-container.scss"
+              }
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js"
@@ -106,7 +109,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/zoom-container.css"
             ],
             "scripts": []
           }
