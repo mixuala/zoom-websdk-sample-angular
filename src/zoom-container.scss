@@ -10,6 +10,7 @@
   &.hydrated {
     display: block;
   }
+  // browser: zoom on left
   &.portrait {
     margin: 0 auto;   // center
     min-height: 211px;
@@ -22,7 +23,7 @@
     height: calc(100% - 40px);
   }
   @media (max-width: 767px) {
-    // portrait
+    // device/portrait: zoom on top
     & {
       margin: 0 auto;   // center
       min-height: 211px;
@@ -128,12 +129,6 @@
   } // end: .meeting-client-inner
 }
 
-// unset react/zoom CSS
-body.undo-zoom-react.undo-zoom-react {
-  min-height: unset;
-  min-width: unset;
-}
-
 // fit to container
 .ReactModalPortal.ReactModalPortal {
   height: 100%;
@@ -167,3 +162,16 @@ body > .ReactModalPortal.ReactModalPortal{
 /**
  * END Zoom CSS fixes
  */
+
+ 
+
+/**
+* react modal portal
+*/
+.global-pop-up-box {
+
+  .global-pop-up-box__main-area {
+    max-width: 90vw;
+  }
+
+}
