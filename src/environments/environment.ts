@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  zoom: {
+    signatureEndpoint: '',
+    apiKey: '',
+    meetingNumber: 123456789,
+    role: 0,
+    leaveUrl: 'http://localhost:4200',
+    userName: 'Angular',
+    userEmail: '',
+    passWord: '',
+  }
 };
 
 /*

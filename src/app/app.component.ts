@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 
 import { ZoomMtg } from '@zoomus/websdk';
+import { environment } from '../environments/environment';
 
 ZoomMtg.preLoadWasm();
 ZoomMtg.prepareJssdk();
@@ -15,14 +16,14 @@ ZoomMtg.prepareJssdk();
 export class AppComponent implements OnInit {
 
   // setup your signature endpoint here: https://github.com/zoom/websdk-sample-signature-node.js
-  signatureEndpoint = ''
-  apiKey = ''
-  meetingNumber = 123456789
-  role = 0
-  leaveUrl = 'http://localhost:4200'
-  userName = 'Angular'
-  userEmail = ''
-  passWord = ''
+  signatureEndpoint = environment.zoom.signatureEndpoint;
+  apiKey = environment.zoom.apiKey; 
+  meetingNumber = environment.zoom.meetingNumber; 
+  role = environment.zoom.role; 
+  leaveUrl = environment.zoom.leaveUrl; 
+  userName = environment.zoom.userName; 
+  userEmail = environment.zoom.userEmail; 
+  passWord = environment.zoom.passWord; 
 
   constructor(public httpClient: HttpClient, @Inject(DOCUMENT) document) {
 
