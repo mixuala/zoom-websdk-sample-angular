@@ -1,8 +1,7 @@
 :root {
   // CSS4
   // portrait: zoom on top, app grows, zoom fixed
-  --zoom-min-height-portrait: 211px;    
-  --app-flex-grow-portrait: 3;
+  --zoom-min-height-portrait: 211px;    // 16:9 for 375px phone
 
   // landscape: zoom on left, zoom grows, app fixed
   --app-min-width-landscape: 375px;     
@@ -21,12 +20,11 @@ body.undo-zoom-react.undo-zoom-react {
     flex-direction: column;
     justify-content: center;
     #zoom-container {
-      // padding: 5px 0 0;  // pushes zmmtg down 5px
-      flex: 1;
       min-height: var(--zoom-min-height-portrait);
+      height: calc( 100vw / 16 * 9);
     }
     #app-container {
-      flex-grow: 3;
+      flex: 1; // ==>  H / (W/16*9), flex-grow: H/W*16/9-1
     }
   }
 }
