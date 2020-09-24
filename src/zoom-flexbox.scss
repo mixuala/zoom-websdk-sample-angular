@@ -61,6 +61,9 @@ body.undo-zoom-react.undo-zoom-react {
       display: block;
     }
   }
+  #app-container {
+    position: relative;
+  }
   &.landscape {
     @include flex-landscape;
   }
