@@ -1,77 +1,123 @@
-
-
 /**
  * Zoom CSS fixes
  */
- #zmmtg-root#zmmtg-root {
+ @mixin zoom-portrait {
+  #zmmtg-root {
+    // if #zoom-container is [16:9], canvas.active-video-container__canvas should be correctly set by zoom
+    min-height: 211px;
+
+    [role=presentation] {
+      .common-ui-component__dropdown-divider {
+        margin: 2px auto;
+      }
+      footer.footer {
+        .more-button__pop-menu {
+          font-size: smaller;
+        }
+      }
+    }
+  }
+}
+
+
+@mixin zoom-landscape {
+  #wc-container-left .main-layout {
+    // center vertically
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .active-video-container__wrap {    
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+
+#zmmtg-root#zmmtg-root {
   position: relative;
   border-radius: 10px;
   display: none;
   &.hydrated {
     display: block;
   }
-  // browser: zoom on left
+  &, .main-content {
+    height: 100% !important;
+  }
+  [role=presentation] {
+    // join dialog
+    width: 100% !important;
+  }
+
+
   &.portrait {
-    margin: 0 auto;   // center
-    min-height: 211px;
-    height: 100%;
-    max-width: calc( 100% - 40px);
+    @include zoom-portrait;
   }
   &.landscape {
-    margin: 20px auto 0;   // center
-    max-width: calc( 100% - 16px);
-    height: calc(100% - 40px);
+    @include zoom-landscape;
   }
   @media (max-width: 767px) {
-    // device/portrait: zoom on top
-    & {
-      margin: 0 auto;   // center
-      min-height: 211px;
-      height: 100%;
-      max-width: calc( 100% - 40px);
-    }
+    @include zoom-portrait;
   }
   @media (min-width: 768px) {
-    // landscape
-    & {
-      margin: 20px auto 0;   // center
-      max-width: calc( 100% - 16px);
-      height: calc(100% - 40px);
+    @include zoom-landscape;
+  }
+
+  
+
+
+
+  .meeting-app { 
+    //  fill #zmmtg-root, override explicit w/h set by zoom
+    height: 100% !important; 
+    width: 100% !important;
+    .wc-container-left {
+      // fill #zmmtg-root .meeting-app
+      .main-layout {
+        // => center horizontially
+        width:100%; 
+        // align-items: start;  (top)
+        // leave 52px on bottom for footer
+  
+        .active-video-container__wrap {
+          // set width to maximize canvas#main-video height
+          // w1=w0/h0*(h1-footerH)
+
+          // portrait
+          // .flex-wrap.zoom #app-container flex-grow determines .wc-container-left[height]
+          width: 337.77px; // 16/9 *(243-53) = 1.77 * (.wc-container-left[height]-.wc-footer[height])
+
+          // ==> zoom sets video H as W/[16:9], so set #zoom-container flex-grow the same way
+
+
+
+          canvas.active-video-container__canvas  {
+            // explicit width, height set by zoom, 
+            // get aspect ratio: width/height
+            width: 100% !important;
+            height: 100% !important;
+          }
+        }
+      }
+    }
+    .join-dialog {
+      top: 30%;
+      .join-audio-by-voip__join-btn {
+        margin-top: unset;
+        font-size: small;
+      }
     }
   }
 
-  .meeting-app {
-    &, .active-main {
-      width: 100% !important;
-      height: 100% !important;  
-    }
-    .active-video-container__wrap {
-      width: 100% !important;
-      height: 80% !important;
-    } 
-    .join-dialog {
-      width: 100% !important;
-    }
-  }
   
   .meeting-client {
     &, .meeting-client-inner {
       position:unset;
     }
     #wc-content {
-      canvas {
-        width: 100% !important;
-        height: 100% !important;
-      }
-      // contains meeting video stream
       position: unset;
-      // #wc-container-left > div {
-      //   // vertical center video
-      //   position: absolute;
-      //   top: 50%;
-      //   transform: translateY(-50%);
-      // }
       #wc-container-left {
+        // meeting/video container
         .sharing-layout {
           & .sharee-container__viewport {
             width: 100% !important;
@@ -79,12 +125,11 @@
           }
         }
         .main-layout {
-          // vertical center video
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
           width: 100%;
         }
+      }
+      #wc-container-right {
+        // chat window
       }
       #sv-active-speaker-view {
         // sv=="speaker-view" or spotlight video?
@@ -103,7 +148,6 @@
         }
       }
       #wc-footer.footer {
-        height: 32px;
         border-radius: 0 0 10px 10px;
         #wc-footer-left {
           min-width: 116px;
@@ -163,7 +207,7 @@ body > .ReactModalPortal.ReactModalPortal{
  * END Zoom CSS fixes
  */
 
- 
+
 
 /**
 * react modal portal
@@ -175,3 +219,11 @@ body > .ReactModalPortal.ReactModalPortal{
   }
 
 }
+
+
+
+// react modal font sizes
+.join-dialog__tabs .zmu-tabs__tab-container .zmu-tabs__tabs-list .zmu-tabs__tab-bar .tab-bar-node {
+  font-size: small;
+}
+
