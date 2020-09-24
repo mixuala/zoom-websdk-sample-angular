@@ -1,17 +1,58 @@
+:root {
+  // CSS4
+  // portrait: zoom on top, app grows, zoom fixed
+  --zoom-min-height-portrait: 211px;    
+  --app-flex-grow-portrait: 3;
+
+  // landscape: zoom on left, zoom grows, app fixed
+  --app-min-width-landscape: 375px;     
+  --zoom-flex-grow-landscape: 1.5;
+}
+
+
 // unset react/zoom CSS
 body.undo-zoom-react.undo-zoom-react {
   min-height: unset;
   min-width: unset;
 }
 
+@mixin flex-portrait {
+  .flex-wrap.zoom {
+    flex-direction: column;
+    justify-content: center;
+    #zoom-container {
+      padding: 5px 0 0;
+      flex: 1;
+      min-height: var(--zoom-min-height-portrait);
+    }
+    #app-container {
+      flex-grow: 3;
+    }
+  }
+}
 
+@mixin flex-landscape {
+  .flex-wrap.zoom {
+    flex-direction: row;
+    align-items: start;
+    #zoom-container {
+      height: 100%;
+      // flex-grow: 1.5;
+      flex-grow: var(--zoom-flex-grow-landscape);
+    }
+    #app-container {
+      height: 100%;
+      min-width: var(--app-min-width-landscape);
+      flex: 1;
+    }
+  }
+}
 
 .flex-wrap.zoom {
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  // align-items: center;
+  // justify-content: center;
   #zoom-container {
     position: relative;
     display: none;
@@ -20,32 +61,10 @@ body.undo-zoom-react.undo-zoom-react {
     }
   }
   &.landscape {
-    flex-direction: row;
-    width: 100vw;
-    height: 100%;
-    #zoom-container {
-      height: 100%;
-      flex: 3;
-    }
-    #app-container {
-      min-width: 375px;
-      flex: 2;
-    }
+    @include flex-landscape;
   }
   &.portrait {
-    flex-direction: column;
-    height: 100%;
-    width: 100%;  // check
-    justify-content: center;
-    #zoom-container {
-      padding: 5px 0 0;
-      width: 100%;
-      flex: 1;
-      min-height: 216px;
-    }
-    #app-container {
-      flex-grow: 3;
-    }
+    @include flex-portrait;
   }
 }
 
@@ -63,44 +82,19 @@ body.undo-zoom-react.undo-zoom-react {
 }
 
 @media (max-width: 767px) {
-  // portrait
-  .flex-wrap.zoom {
-    flex-direction: column;
-    height: 100%;
-    width: 100%;  // check
-    justify-content: center;
-    #zoom-container {
-      margin: 5px 0;
-      width: 100%;
-      flex: 1;
-      min-height: 221px;
-    }
-    #app-container {
-      flex-grow: 3;
-      > ion-grid:first-child {
-        padding-top: 0;
-        ion-col:first-child {
-          padding-top: 0;
-        }
-      }
-    }
-  }
+  @include flex-portrait;
 }
 
 @media (min-width: 768px) {
-  // landscape
-  .flex-wrap.zoom {
-    flex-direction: row;
-    width: 100vw;
-    height: 100%;
-    #zoom-container {
-      height: 100%;
-      flex: 3;
-    }
-    #app-container {
-      min-width: 375px;
-      flex: 2;
-    }
-  }
+  @include flex-landscape;
 }
 
+
+.flex-wrap.dev {
+  #zoom-container.hydrated {
+    background-color: darkcyan;
+  }
+  #app-container {
+    background-color: lightcoral;
+  }
+}
