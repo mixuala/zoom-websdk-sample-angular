@@ -21,7 +21,7 @@ body.undo-zoom-react.undo-zoom-react {
     flex-direction: column;
     justify-content: center;
     #zoom-container {
-      padding: 5px 0 0;
+      // padding: 5px 0 0;  // pushes zmmtg down 5px
       flex: 1;
       min-height: var(--zoom-min-height-portrait);
     }
@@ -53,6 +53,7 @@ body.undo-zoom-react.undo-zoom-react {
   flex-wrap: nowrap;
   // align-items: center;
   // justify-content: center;
+  height: 100%;
   #zoom-container {
     position: relative;
     display: none;
